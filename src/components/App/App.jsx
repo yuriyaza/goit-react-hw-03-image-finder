@@ -7,7 +7,7 @@ import { Button } from 'components/Button/Button';
 import { Modal } from 'components/Modal/Modal';
 
 import css from './App.module.css';
-import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+// import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 
 const api = new Api();
 

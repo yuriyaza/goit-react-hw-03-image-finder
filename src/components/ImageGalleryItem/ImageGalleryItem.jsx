@@ -1,21 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import css from './ImageGalleryItem.module.css';
 
-export class ImageGalleryItem extends React.Component {
-  render() {
-    const { image, onImageClick } = this.props;
-    
-    return (
-      <li className={css.imageGalleryItem}>
-        <img
-          className={css.imageGalleryItemImage}
-          src={image.webformatURL}
-          alt={'Tags: ' + image.tags}
-          onClick={() => {
-            onImageClick(image);
-          }}
-        />
-      </li>
-    );
-  }
-}
+export const ImageGalleryItem = ({ image, onImageClick }) => {
+  return (
+    <li className={css.imageGalleryItem}>
+      <img
+        className={css.imageGalleryItemImage}
+        src={image.webformatURL}
+        alt={'Tags: ' + image.tags}
+        onClick={() => { onImageClick(image); }}
+      />
+    </li>
+  );
+};
+
+ImageGalleryItem.types = {
+  image: PropTypes.object.isRequired,
+  onImageClick: PropTypes.func.isRequired,
+};

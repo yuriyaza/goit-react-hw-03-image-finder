@@ -18,9 +18,8 @@
 
 .closeButton {
   position: absolute;
-  top: 15px;
+  top: 10px;
   right: 25px;
- 
   width: 40px;
   height: 40px;
   padding: 0;
@@ -28,19 +27,16 @@
   background-image: url(../../icons/close.svg);
   background-repeat: no-repeat;
   background-position: center;
- 
   border: none;
   border-radius: 50%;
   background-color: rgba(0, 0, 0, 0.3);
-  cursor: pointer; 
+  cursor: pointer;
   opacity: 0.7;
 }
 
 .closeButton:hover,
 .closeButton:focus {
-  /* scale: 1.05; */
   opacity: 0.5;
-
 }
 
 .closeButton:active {

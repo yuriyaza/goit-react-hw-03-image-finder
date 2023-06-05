@@ -3,12 +3,21 @@ import css from './Modal.module.css';
 
 export class Modal extends React.Component {
   render() {
-    const { image } = this.props;
-    console.log('modal', this.props.image);
+    const { image, onClose } = this.props;
+
+    const closeModal = () => {
+      onClose();
+    };
+
     return (
       <div className={css.overlay}>
         <div className={css.modal}>
-          <img src={image} alt="" />
+          <button
+            className={css.closeButton}
+            type="button"
+            onClick={closeModal}
+          ></button>
+          <img src={image.largeImageURL} alt={'Tags: ' + image.tags} />
         </div>
       </div>
     );

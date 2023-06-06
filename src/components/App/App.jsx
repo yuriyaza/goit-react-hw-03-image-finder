@@ -1,17 +1,14 @@
 import React from 'react';
-import { Api } from 'services/api';
+import { ToastContainer, Slide, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+import * as API from 'services/api';
 import { Searchbar } from 'components/Searchbar/Searchbar';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 import { Button } from 'components/Button/Button';
 import { Modal } from 'components/Modal/Modal';
 import { Loader } from 'components/Loader/Loader';
-
-import { ToastContainer, Slide, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import css from './App.module.css';
-
-const api = new Api();
 
 export class App extends React.Component {
   state = {
@@ -34,10 +31,11 @@ export class App extends React.Component {
 
   handleGetData = async () => {
     const { query, page, perPage } = this.state;
+
     try {
       this.setState({ showMoreButton: false, showLoader: true });
 
-      const data = await api.getData(query, page, perPage);
+      const data = await API.getData(query, page, perPage);
       const { hits: images, totalHits: total } = data;
 
       if (images.length === 0) {
@@ -48,7 +46,7 @@ export class App extends React.Component {
       const showMoreButton = total / (page * perPage) > 1;
       this.setState({ images: [...this.state.images, ...images], showMoreButton });
     }
-
+    
     catch (error) {
       toast.error('An error has occurred');
     }
@@ -83,31 +81,13 @@ export class App extends React.Component {
     return (
       <div className={css.app}>
         <Searchbar onSubmit={handleFormSubmit} />
-
-        <ImageGallery
-          images={images}
-          onImageClick={handleModalOpen}
-        />
+        <ImageGallery images={images} onImageClick={handleModalOpen} />
 
         {showMoreButton && <Button onClick={handleMoreButtonClick} />}
-
-        {showModal && (
-          <Modal
-            image={currentImage}
-            onModalClose={handleModalClose}
-          />
-        )}
-
         {showLoader && <Loader />}
+        {showModal && <Modal image={currentImage} onModalClose={handleModalClose} />}
 
-        <ToastContainer
-          transition={Slide}
-          theme='colored'
-          autoClose={2500}
-          closeOnClick
-          pauseOnHover={false}
-          pauseOnFocusLoss
-        />
+        <ToastContainer transition={Slide} theme='colored' autoClose={2500} closeOnClick pauseOnHover={false} pauseOnFocusLoss />
       </div>
     );
   }

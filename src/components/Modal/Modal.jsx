@@ -24,25 +24,13 @@ export class Modal extends React.Component {
   };
 
   render() {
-    const { image } = this.props;
+    const { image, onModalClose } = this.props;
     return (
-      <div
-        className={css.overlay}
-        onClick={this.onBackdropClick}>
-        
+      <div className={css.overlay} onClick={this.onBackdropClick}>
         <div className={css.modal}>
-          <button
-            className={css.closeButton}
-            type='button'
-            onClick={() => { this.props.onModalClose(); }}>
-          </button>
-          
-          <img
-            src={image.largeImageURL}
-            alt={'Tags: ' + image.tags}
-          />
+          <button className={css.closeButton} type='button' onClick={() => { onModalClose() }}></button>
+          <img src={image.largeImageURL} alt={'Tags: ' + image.tags} />
         </div>
-
       </div>
     );
   }

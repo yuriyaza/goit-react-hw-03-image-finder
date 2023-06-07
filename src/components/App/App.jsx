@@ -43,7 +43,7 @@ export class App extends React.Component {
         return;
       }
 
-      const showMoreButton = total / (page * perPage) > 1;
+      const showMoreButton = page < Math.ceil(total / perPage);
       this.setState({ images: [...this.state.images, ...images], showMoreButton });
     }
     
